@@ -14,7 +14,7 @@ TABLE_GAI = 'gaiadr3.gaia_source'
 
  
 sel_cols_gai = [
-    'solution_id','ra','dec',
+    'source_id','ra','dec',
     'parallax','distance_gspphot','pm','pmra','pmdec',
     'radial_velocity','teff_gspphot','logg_gspphot',
     'phot_g_mean_mag','phot_bp_mean_mag','phot_rp_mean_mag',
