@@ -12,7 +12,6 @@ def get_filename(url):
     return filename
 
 
-
 def jd_to_datetime(jd):
 
     jd = jd + 0.5

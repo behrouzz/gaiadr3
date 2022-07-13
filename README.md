@@ -22,6 +22,46 @@ The ancillary data are those that can not be accessed via ADQL Tap queries. Epoc
 You need to use DataLink to retrieve this type of data. 
 
 
+## Tap queries
+
+The standard way to retrieve tabular data is by using tap queries. Pass your script to the *sql2df* function. It will return two pandas dataframes: data and meta.
+
+```python
+>>> from gaiadr3 import sql2df
+>>> data, meta = sql2df('SELECT TOP 5 source_id, ra, dec FROM gaiadr3.gaia_source')
+>>> print(meta)
+                                                 description  unit
+name                                                              
+source_id  Unique source identifier (unique within a part...  None
+ra                                           Right ascension   deg
+dec                                              Declination   deg
+>>> print(data)
+             source_id          ra        dec
+0  4116903625596296576  266.323047 -22.651077
+1  4116903625596299136  266.321568 -22.651833
+2  4116903625596302976  266.320308 -22.652672
+3  4116903625596305408  266.321332 -22.651379
+4  4116903625596305536  266.321399 -22.651430
+```
+
+For ease of use, I have created some shortcut keywods which begin with '@'. Currently, they are:
+
+* @MT : Main Table (gaiadr3.gaia_source)
+* @LT : Lite Table (gaiadr3.gaia_source_lite)
+* @COLS : A selection of the most important columns
+
+```python
+>>> data, meta = sql2df('SELECT TOP 3 @COLS FROM @MT')
+>>> data
+             source_id          ra  ...  has_mcmc_gspphot  has_mcmc_msc
+0  4116903625596296576  266.323047  ...             False         False
+1  4116903625596299136  266.321568  ...             False         False
+2  4116903625596302976  266.320308  ...             False         False
+
+[3 rows x 24 columns]
+```
+
+
 ## Get single source
 
 The simplest way to get data for a single source, is using *GaiaObject* class. You can create an instance of this class by passing a *source_id*:

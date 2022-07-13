@@ -40,6 +40,23 @@ dc_vizier = {'BASE': BASE_VIZ, 'TABLE': TABLE_VIZ, 'COLS': sel_cols_viz}
 dc_gaia = {'BASE': BASE_GAI, 'TABLE': TABLE_GAI, 'COLS': sel_cols_gai}
 
 
+
+def shortcut(script, server='gaia'):
+    dc_server = get_server_dc(server)
+    
+    if server.lower()=='gaia':
+        s = script.replace('@MT', TABLE_GAI)
+        s = s.replace('@LT', 'gaiadr3.gaia_source_lite')
+    elif server.lower()=='vizier':
+        s = script.replace('@MT', TABLE_VIZ)
+    else:
+        raise Exception('Invalide server!')
+    
+    cols = ','.join(dc_server['COLS'])
+    s = s.replace('@COLS', cols)
+    return s
+
+
 def get_server_dc(server):
     if server.lower()=='gaia':
         dc_server = dc_gaia
@@ -71,7 +88,8 @@ def columns(table=None, ucd=False, server='gaia'):
     return df.set_index('column_name')
 
 
-def sql2df(script):
+def sql2df(script, server='gaia'):
+    script = shortcut(script, server=server)
     r = get(script)
     cols = [i['name'] for i in r['metadata']]
     data = pd.DataFrame(r['data'], columns=cols)
