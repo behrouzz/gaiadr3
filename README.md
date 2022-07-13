@@ -36,6 +36,7 @@ Now you can use the *download* method to retrieve both tabular and ancillary. Th
 Both are True by default. After using this method, some important key parameter will be downloaded as a python dictionary in the *key_param* attribute.
 
 ```python
+>>> obj.download()
 >>> print(obj.key_param['data'])
 {'solution_id': 1636148068921376768,
  'ra': 45.09499151004629,
