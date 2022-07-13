@@ -44,7 +44,7 @@ dec                                              Declination   deg
 4  4116903625596305536  266.321399 -22.651430
 ```
 
-For ease of use, I have created some shortcut keywods which begin with '@'. Currently, they are:
+For ease of use, I have created some shortcut keywords which begin with '@'. Currently, they are:
 
 * @MT : Main Table (gaiadr3.gaia_source)
 * @LT : Lite Table (gaiadr3.gaia_source_lite)
