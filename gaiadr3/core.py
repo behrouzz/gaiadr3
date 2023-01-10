@@ -38,6 +38,7 @@ class GaiaObject:
         self.adr = None
         self.files = None
         self.key_param = None
+        self.ipx12 = self.healpix_index(12)
 
         self.has = {
             'EPOCH_PHOTOMETRY': False,
@@ -62,6 +63,10 @@ class GaiaObject:
                 for k in self.has.keys():
                     if k in f:
                         self.has[k] = True
+
+
+    def healpix_index(self, level=12):
+        return int(int(self.source_id) / 2**(59-2*level))
 
 
     def download(self, key_param=True, ancillary=True):
